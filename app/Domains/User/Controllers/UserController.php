@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Domains\User\Controllers;
 
-use App\Http\Requests\UserRequest;
-use App\Contracts\UserServiceInterface;
+use App\Domains\User\Requests\UserRequest;
+use App\Domains\User\Contracts\UserServiceInterface;
+use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
