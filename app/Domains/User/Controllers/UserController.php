@@ -2,14 +2,20 @@
 
 namespace App\Domains\User\Controllers;
 
+use App\Domains\User\Actions\CreateUserAction;
 use App\Domains\User\Requests\UserRequest;
-use App\Domains\User\Contracts\UserServiceInterface;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 
 class UserController extends Controller
 {
-    public function store(UserRequest $request, UserServiceInterface $userService)
+    public function index()
     {
-        return $userService->store($request->validated());
+        return User::with('profile:user_id,bio')->get();
+    }
+
+    public function store(UserRequest $request, CreateUserAction $createUserAction)
+    {
+        return $createUserAction($request->validated());
     }
 }

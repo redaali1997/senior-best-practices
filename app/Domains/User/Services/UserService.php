@@ -2,10 +2,11 @@
 
 namespace App\Domains\User\Services;
 
+use App\Domains\User\Contracts\UserServiceInterface;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
-class UserService
+class UserService implements UserServiceInterface
 {
     public function store(array $data): User
     {
