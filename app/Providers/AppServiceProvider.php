@@ -2,8 +2,9 @@
 
 namespace App\Providers;
 
-use App\Contracts\UserServiceInterface;
-use App\Services\UserService;
+use App\Domains\User\Contracts\UserServiceInterface;
+use App\Domains\User\Services\UserService;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -21,6 +22,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        if (! app()->isProduction()) {
+            Model::preventLazyLoading();
+        }
     }
 }
