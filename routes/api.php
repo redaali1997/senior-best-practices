@@ -22,7 +22,7 @@ Route::put('users/{user}', function (Request $request, User $user) {
 Route::post('login', function (Request $request) {
     $request->validate([
         'email' => 'required|email',
-        'password' => 'required',
+        'password' => 'required|string|min:8',
     ]);
     
     return response()->json([
