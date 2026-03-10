@@ -1,6 +1,8 @@
 <?php
 
+use App\Events\UserRegistered;
 use App\Models\User;
+use Illuminate\Support\Facades\Event;
 
 it('update user', function () {
     $user = User::factory()->create([
@@ -29,3 +31,15 @@ it('validates password field in login', function ($invalidPassword) {
 
     $response->assertStatus(422);
 })->with(['', '123', '    ']);
+
+it('trigger UserRegistered event', function () {
+    Event::fake();
+
+    $this->postJson('/api/register', [
+        'name' => 'Omar',
+        'email' => 'omar@omar.com',
+        'password' => 'password',
+    ]);
+
+    Event::assertDispatched(UserRegistered::class);
+});

@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\UserRegistered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
@@ -28,5 +29,24 @@ Route::post('login', function (Request $request) {
     return response()->json([
         'status' => 'success',
         'message' => 'Login successful',
+    ]);
+});
+
+// register user
+Route::post('register', function (Request $request) {
+    $data = $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|unique:users,email',
+        'password' => 'required|string|min:8',
+    ]);
+
+    $user = User::create($data);
+
+    UserRegistered::dispatch($user);
+    
+    return response()->json([
+        'status' => 'success',
+        'message' => 'User registered successfully',
+        'user' => $user
     ]);
 });
