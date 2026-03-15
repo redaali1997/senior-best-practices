@@ -1,5 +1,6 @@
 <?php
 
+use App\Domains\User\Controllers\UserController;
 use App\Events\UserRegistered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -33,20 +34,10 @@ Route::post('login', function (Request $request) {
 });
 
 // register user
-Route::post('register', function (Request $request) {
-    $data = $request->validate([
-        'name' => 'required|string|max:255',
-        'email' => 'required|email|unique:users,email',
-        'password' => 'required|string|min:8',
-    ]);
+Route::post('register', [UserController::class, 'store']);
 
-    $user = User::create($data);
-
-    UserRegistered::dispatch($user);
-    
+Route::get('/health', function () {
     return response()->json([
-        'status' => 'success',
-        'message' => 'User registered successfully',
-        'user' => $user
+        'status' => 'healthy',
     ]);
 });
