@@ -2,6 +2,7 @@
 
 use App\Domains\User\Controllers\UserController;
 use App\Events\UserRegistered;
+use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
@@ -21,17 +22,7 @@ Route::put('users/{user}', function (Request $request, User $user) {
     ]);
 });
 
-Route::post('login', function (Request $request) {
-    $request->validate([
-        'email' => 'required|email',
-        'password' => 'required|string|min:8',
-    ]);
-    
-    return response()->json([
-        'status' => 'success',
-        'message' => 'Login successful',
-    ]);
-});
+Route::post('login', [AuthController::class, 'login'])->middleware('throttle:5,1');
 
 // register user
 Route::post('register', [UserController::class, 'store']);
