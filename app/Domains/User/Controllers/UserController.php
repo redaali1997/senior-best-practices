@@ -14,6 +14,12 @@ class UserController extends Controller
         return User::with('profile:user_id,bio')->get();
     }
 
+    // show
+    public function show($id)
+    {
+        return User::with('profile:user_id,bio')->find($id);
+    }
+
     public function store(UserRequest $request, CreateUserAction $createUserAction)
     {
         return $createUserAction($request->validated());
