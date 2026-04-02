@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
+use App\Contracts\PaymentGatewayInterface;
 use App\Domains\User\Contracts\SmsProviderInterface;
 use App\Domains\User\Contracts\UserServiceInterface;
 use App\Domains\User\Services\UserService;
+use App\Services\PaymobPaymentGateway;
 use App\Services\TwilioSmsService;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
@@ -18,6 +20,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind(UserServiceInterface::class, UserService::class);
         $this->app->bind(SmsProviderInterface::class, TwilioSmsService::class);
+        $this->app->bind(PaymentGatewayInterface::class, PaymobPaymentGateway::class);
     }
 
     /**
