@@ -8,6 +8,7 @@ use App\Domains\User\Contracts\UserServiceInterface;
 use App\Domains\User\Services\UserService;
 use App\Services\PaymobPaymentGateway;
 use App\Services\TwilioSmsService;
+use CompanySettings;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
 
@@ -21,6 +22,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(UserServiceInterface::class, UserService::class);
         $this->app->bind(SmsProviderInterface::class, TwilioSmsService::class);
         $this->app->bind(PaymentGatewayInterface::class, PaymobPaymentGateway::class);
+        $this->app->singleton(CompanySettings::class);
     }
 
     /**
