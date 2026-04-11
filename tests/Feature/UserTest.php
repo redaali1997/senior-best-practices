@@ -63,11 +63,11 @@ it('create user with avatar', function () {
     Storage::fake('public');
     $avatar = UploadedFile::fake()->image('avatar.jpg');
 
-    $user = (new CreateUserAction())([
+    $user = (new CreateUserAction)([
         'name' => 'Reda Ali',
         'email' => 'reda@reda.com',
         'password' => 'password',
-        'avatar' => $avatar
+        'avatar' => $avatar,
     ]);
 
     $this->assertDatabaseHas('users', [

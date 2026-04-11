@@ -1,5 +1,3 @@
 <?php
 
-class CompanySettings {
-    
-}
+class CompanySettings {}

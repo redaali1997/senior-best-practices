@@ -3,7 +3,6 @@
 namespace App\Domains\User\Actions;
 
 use App\Events\UserRegistered;
-use App\Jobs\SendWelcomeEmailJob;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;

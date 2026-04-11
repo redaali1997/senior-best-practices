@@ -3,8 +3,6 @@
 namespace App\Listeners;
 
 use App\Domains\User\Contracts\SmsProviderInterface;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 
 class SendWelcomeSms
 {

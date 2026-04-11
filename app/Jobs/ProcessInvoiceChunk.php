@@ -5,7 +5,6 @@ namespace App\Jobs;
 use App\Models\Invoice;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
-use Illuminate\Support\Collection;
 
 class ProcessInvoiceChunk implements ShouldQueue
 {

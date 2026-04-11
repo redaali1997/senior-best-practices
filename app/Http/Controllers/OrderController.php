@@ -14,6 +14,7 @@ class OrderController extends Controller
         $order = Order::create($request->validated());
 
         OrderCreated::dispatch($order);
+
         return response()->json(['message' => 'Order placed successfully']);
     }
 

@@ -7,17 +7,19 @@ use App\Domains\Payment\Strategies\CashPayment;
 use App\Domains\Payment\Strategies\PaypalPayment;
 use Exception;
 
-class PaymentMethodFactory {
+class PaymentMethodFactory
+{
     private const METHODS = [
         'paypal' => PaypalPayment::class,
         'cash' => CashPayment::class,
     ];
 
-    public static function make(string $method): PaymentStrategyInterface {
+    public static function make(string $method): PaymentStrategyInterface
+    {
         if (! array_key_exists($method, self::METHODS)) {
-            throw new Exception("Payment method not found");
+            throw new Exception('Payment method not found');
         }
-        
+
         return app(self::METHODS[$method]);
     }
 }

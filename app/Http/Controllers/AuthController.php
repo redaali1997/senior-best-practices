@@ -12,7 +12,7 @@ class AuthController extends Controller
             'email' => 'required|email',
             'password' => 'required|string|min:8',
         ]);
-        
+
         return response()->json([
             'status' => 'success',
             'message' => 'Login successful',

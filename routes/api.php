@@ -1,11 +1,10 @@
 <?php
 
 use App\Domains\User\Controllers\UserController;
-use App\Events\UserRegistered;
 use App\Http\Controllers\AuthController;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Models\User;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -14,11 +13,11 @@ Route::get('/user', function (Request $request) {
 // edit user
 Route::put('users/{user}', function (Request $request, User $user) {
     $user->update($request->all());
-    
+
     return response()->json([
         'status' => 'success',
         'message' => 'User updated successfully',
-        'user' => $user
+        'user' => $user,
     ]);
 });
 
