@@ -1,0 +1,9 @@
+name: My First Workflow
+on: [push]
+
+jobs:
+  say-hello:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Greet the user
+        run: echo "Hello Reda! Your CI/CD journey has started."
