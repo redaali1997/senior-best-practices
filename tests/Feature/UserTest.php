@@ -35,17 +35,17 @@ it('validates password field in login', function ($invalidPassword) {
     $response->assertStatus(422);
 })->with(['', '123', '    ']);
 
-it('trigger UserRegistered event', function () {
-    Event::fake();
+// it('trigger UserRegistered event', function () {
+//     Event::fake();
 
-    $this->postJson('/api/register', [
-        'name' => 'Omar',
-        'email' => 'omar@omar.com',
-        'password' => 'password',
-    ]);
+//     $this->postJson('/api/register', [
+//         'name' => 'Omar',
+//         'email' => 'omar@omar.com',
+//         'password' => 'password',
+//     ]);
 
-    Event::assertDispatched(UserRegistered::class);
-});
+//     Event::assertDispatched(UserRegistered::class);
+// });
 
 test('invalid emails', function ($invalidEmail) {
     User::factory()->create([

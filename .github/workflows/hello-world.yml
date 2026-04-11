@@ -1,9 +1,27 @@
-name: My First Workflow
-on: [push]
+name: Laravel Ci (Pest)
+on: [push, pull_request]
 
 jobs:
-  say-hello:
+  run-tests:
     runs-on: ubuntu-latest
     steps:
-      - name: Greet the user
-        run: echo "Hello Reda! Your CI/CD journey has started."
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.2
+          extensions: dom, curl, libxml, mbstring, zip
+          coverage: none
+      - name: Install dependencies
+        run: composer install -q --no-interaction
+      - name: Create .env file
+        run: cp .env.example .env
+      - name: Generate key
+        run: php artisan key:generate
+      - name: Create database
+        run: touch database/database.sqlite
+      - name: Run migrations
+        run: php artisan migrate
+      - name: Run tests
+        run: php artisan test
